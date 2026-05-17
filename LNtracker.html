@@ -215,8 +215,10 @@ function fmt(ds){
 function midAlertDate(ds){
   if(!ds) return null;
   const d=new Date(ds+'T00:00:00');
+  if(isNaN(d.getTime())) return null;
   d.setMonth(d.getMonth()+6);
   return d.toISOString().slice(0,10);
+}
 }
 function isDedOverdue(a){
   if(a.dedStatus==='overdue') return true;
