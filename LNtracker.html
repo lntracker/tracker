@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<!-- saved from url=(0054)file:///C:/Users/casey/Downloads/ln_tracker_app_5.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
 <title>LN Worksite Tracker</title>
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link href="./LN Worksite_files/css2" rel="stylesheet">
-<link rel="stylesheet" href="./LN Worksite_files/tabler-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"/>
 <style>
 :root{
   --bg:#f4f3f0;--surface:#ffffff;--surface2:#f8f7f4;--border:#e8e6e1;
@@ -98,16 +98,16 @@ html,body{min-height:100%;background:var(--bg);font-family:'DM Sans',system-ui,s
 </head>
 <body>
 
-<div id="cfg-screen" class="hidden">
+<div id="cfg-screen">
   <div class="cfg-logo"><i class="ti ti-building-skyscraper"></i></div>
   <div class="cfg-title">LN Worksite Tracker</div>
   <div class="cfg-sub">Paste your Google Apps Script Web App URL to connect your Google Sheet.</div>
-  <input class="cfg-input" id="cfg-url" type="url" placeholder="https://script.google.com/macros/s/.../exec" autocorrect="off" autocapitalize="off">
+  <input class="cfg-input" id="cfg-url" type="url" placeholder="https://script.google.com/macros/s/.../exec" autocorrect="off" autocapitalize="off"/>
   <button class="cfg-btn" onclick="saveConfig()">Connect &amp; Continue</button>
   <div class="cfg-hint">Follow the setup instructions to get your URL from Google Apps Script.</div>
 </div>
 
-<div id="app" style="display: block;">
+<div id="app" style="display:none">
   <div class="topbar">
     <div>
       <div class="topbar-title">LN Worksite Tracker</div>
@@ -115,36 +115,36 @@ html,body{min-height:100%;background:var(--bg);font-family:'DM Sans',system-ui,s
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <span style="font-size:11px;opacity:0.8" id="sync-lbl">Synced</span>
-      <div class="sync-dot ok" id="sync-dot"></div>
+      <div class="sync-dot" id="sync-dot"></div>
     </div>
   </div>
 
   <div class="stats-grid">
-    <div class="stat-card"><div class="stat-label">Total accounts</div><div class="stat-value" id="s0">0</div></div>
-    <div class="stat-card"><div class="stat-label">Blue books pending</div><div class="stat-value" id="s1">0</div></div>
-    <div class="stat-card"><div class="stat-label">Deductions overdue</div><div class="stat-value" id="s2">0</div></div>
-    <div class="stat-card"><div class="stat-label">Re-enroll ≤60d</div><div class="stat-value" id="s3">0</div></div>
-    <div class="stat-card" style="grid-column:1/-1"><div class="stat-label">Mid-year enrollments due ≤30d</div><div class="stat-value" id="s4">0</div></div>
+    <div class="stat-card"><div class="stat-label">Total accounts</div><div class="stat-value" id="s0">—</div></div>
+    <div class="stat-card"><div class="stat-label">Blue books pending</div><div class="stat-value" id="s1">—</div></div>
+    <div class="stat-card"><div class="stat-label">Deductions overdue</div><div class="stat-value" id="s2">—</div></div>
+    <div class="stat-card"><div class="stat-label">Re-enroll ≤60d</div><div class="stat-value" id="s3">—</div></div>
+    <div class="stat-card" style="grid-column:1/-1"><div class="stat-label">Mid-year enrollments due ≤30d</div><div class="stat-value" id="s4">—</div></div>
   </div>
 
   <div class="filter-bar">
-    <div class="filter-chip active" onclick="setFilter(&#39;all&#39;,this)">All</div>
-    <div class="filter-chip" onclick="setFilter(&#39;bb-pending&#39;,this)">Blue book pending</div>
-    <div class="filter-chip" onclick="setFilter(&#39;ded-overdue&#39;,this)">Deductions overdue</div>
-    <div class="filter-chip" onclick="setFilter(&#39;reenroll&#39;,this)">Re-enroll due</div>
-    <div class="filter-chip" onclick="setFilter(&#39;midyear&#39;,this)">Mid-year due</div>
-    <div class="filter-chip" onclick="setFilter(&#39;any-alert&#39;,this)">Any alert</div>
+    <div class="filter-chip active" onclick="setFilter('all',this)">All</div>
+    <div class="filter-chip" onclick="setFilter('bb-pending',this)">Blue book pending</div>
+    <div class="filter-chip" onclick="setFilter('ded-overdue',this)">Deductions overdue</div>
+    <div class="filter-chip" onclick="setFilter('reenroll',this)">Re-enroll due</div>
+    <div class="filter-chip" onclick="setFilter('midyear',this)">Mid-year due</div>
+    <div class="filter-chip" onclick="setFilter('any-alert',this)">Any alert</div>
   </div>
 
   <div class="search-wrap">
     <i class="ti ti-search search-icon"></i>
-    <input type="text" id="srch" placeholder="Search business, agent, owner..." oninput="render()">
+    <input type="text" id="srch" placeholder="Search business, agent, owner..." oninput="render()"/>
   </div>
 
-  <div class="cards" id="cards"><div class="state-msg"><i class="ti ti-inbox"></i>No accounts yet. Tap + to add your first.</div></div>
+  <div class="cards" id="cards"></div>
 </div>
 
-<button class="fab" id="fab" onclick="openModal()" aria-label="Add account" style="display: flex;">
+<button class="fab" id="fab" onclick="openModal()" aria-label="Add account" style="display:none">
   <i class="ti ti-plus"></i>
 </button>
 
@@ -157,14 +157,14 @@ html,body{min-height:100%;background:var(--bg);font-family:'DM Sans',system-ui,s
     </div>
     <div class="modal-body">
       <div class="fsec"><i class="ti ti-building" style="font-size:14px"></i> Business info</div>
-      <div class="fr"><label>Business name *</label><input type="text" id="f-biz" autocomplete="organization"></div>
+      <div class="fr"><label>Business name *</label><input type="text" id="f-biz" autocomplete="organization"/></div>
       <div class="g2">
-        <div class="fr"><label>Account owner</label><input type="text" id="f-owner" placeholder="Your name"></div>
-        <div class="fr"><label>Agent assigned</label><input type="text" id="f-agent" placeholder="Agent name"></div>
+        <div class="fr"><label>Account owner</label><input type="text" id="f-owner" placeholder="Your name"/></div>
+        <div class="fr"><label>Agent assigned</label><input type="text" id="f-agent" placeholder="Agent name"/></div>
       </div>
       <div class="fsec"><i class="ti ti-calendar" style="font-size:14px"></i> Enrollment</div>
       <div class="g2">
-        <div class="fr"><label>Enrollment date</label><input type="date" id="f-enroll"></div>
+        <div class="fr"><label>Enrollment date</label><input type="date" id="f-enroll"/></div>
         <div class="fr"><label>Blue book</label>
           <select id="f-bb"><option value="pending">Pending</option><option value="delivered">Delivered</option></select>
         </div>
@@ -174,16 +174,16 @@ html,body{min-height:100%;background:var(--bg);font-family:'DM Sans',system-ui,s
         <div class="fr"><label>Status</label>
           <select id="f-ded"><option value="pending">Pending</option><option value="confirmed">Confirmed</option><option value="overdue">Overdue</option></select>
         </div>
-        <div class="fr"><label>Confirmed date</label><input type="date" id="f-ded-date"></div>
+        <div class="fr"><label>Confirmed date</label><input type="date" id="f-ded-date"/></div>
       </div>
       <div class="fsec"><i class="ti ti-bell" style="font-size:14px"></i> Re-enrollment &amp; mid-year</div>
       <div class="g2">
-        <div class="fr"><label>Re-enrollment due</label><input type="date" id="f-re"></div>
-        <div class="fr"><label>Mid-year date</label><input type="date" id="f-mid">
+        <div class="fr"><label>Re-enrollment due</label><input type="date" id="f-re"/></div>
+        <div class="fr"><label>Mid-year date</label><input type="date" id="f-mid"/>
           <div class="hint">Alert fires 30 days before 6-month mark</div>
         </div>
       </div>
-      <div class="fr"><label>Notes</label><input type="text" id="f-notes" placeholder="Optional"></div>
+      <div class="fr"><label>Notes</label><input type="text" id="f-notes" placeholder="Optional"/></div>
     </div>
     <div class="modal-footer">
       <button class="btn-secondary" onclick="closeModal()">Cancel</button>
@@ -192,7 +192,7 @@ html,body{min-height:100%;background:var(--bg);font-family:'DM Sans',system-ui,s
   </div>
 </div>
 
-<div class="toast" id="toast">Loaded 0 accounts</div>
+<div class="toast" id="toast"></div>
 
 <script>
 const LSKEY = 'ln_script_url';
@@ -453,6 +453,5 @@ async function bootApp(){
 if(SCRIPT_URL){bootApp();}
 else{document.getElementById('cfg-screen').style.display='flex';}
 </script>
-
-
-</body></html>
+</body>
+</html>
